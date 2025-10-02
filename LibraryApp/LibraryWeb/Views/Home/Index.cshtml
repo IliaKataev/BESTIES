@@ -1,0 +1,37 @@
+﻿@model IEnumerable<LibraryWeb.Models.BookDto>
+
+<h2>Список книг</h2>
+
+<table border="1" cellpadding="5">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Subtitle</th>
+            <th>Authors</th>
+            <th>Subjects</th>
+            <th>First Publish Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
+                <tr>
+                    <td>@book.Title</td>
+                    <td>@book.Subtitle</td>
+                    <td>
+                    @foreach (var author in book.Authors)
+                    {
+                        @author.Name <br />
+                    }
+                    </td>
+                    <td>
+                    @foreach (var subject in book.Subjects)
+                    {
+                        @subject.Subject <br />
+                    }
+                    </td>
+                    <td>@book.FirstPublishDate</td>
+                </tr>
+        }
+    </tbody>
+</table>
