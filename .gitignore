@@ -1,0 +1,60 @@
+## Visual Studio ##
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Build results ##
+bin/
+obj/
+Debug/
+Release/
+TestResults/
+*.dll
+*.exe
+*.app
+*.class
+*.jar
+
+## NuGet ##
+*.nupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+## ASP.NET / ASP.NET Core ##
+wwwroot/lib/
+node_modules/
+*.log
+*.vsix
+*.pdb
+
+## Rider ##
+.idea/
+
+## Mac ##
+.DS_Store
+
+## Windows ##
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+## Database ##
+*.mdf
+*.ldf
+*.sqlite
+*.db
+*.db-journal
+
+## User secrets ##
+secrets.json
+appsettings.Development.json
+
+## Others ##
+*.cache
+*.bak
+*.swp
+*.tmp
