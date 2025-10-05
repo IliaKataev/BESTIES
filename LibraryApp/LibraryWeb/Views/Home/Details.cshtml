@@ -1,0 +1,29 @@
+﻿@model LibraryWeb.Models.BookDto
+
+<h2>@Model.Title</h2>
+<h4>
+    @foreach (var author in Model.Authors)
+    {
+        @author.Name
+            <br />
+    }
+</h4>
+
+@if (Model.Covers?.Any() == true)
+{
+        <img src="@($"https://covers.openlibrary.org/b/id/{Model.Covers.First().CoverFile}-L.jpg")" 
+             alt="@Model.Title" width="200" />
+}
+
+<p><strong>Описание:</strong> @Model.Description</p>
+<p><strong>Дата публикации:</strong> @Model.FirstPublishDate</p>
+
+<h5>Темы:</h5>
+<ul>
+    @foreach (var subject in Model.Subjects)
+    {
+        <li>@subject.Subject</li>
+    }
+</ul>
+
+<a asp-action="Index">← Назад к списку</a>

@@ -13,6 +13,13 @@
         public List<AuthorDto> Authors { get; set; }
     }
 
+    public class BookListItemDto
+    {
+        public string Key { get; set; }
+        public string Title { get; set; }
+        public string AuthorName { get; set; }
+    }
+
     public class BookCoverDto
     {
         public long Id { get; set; }

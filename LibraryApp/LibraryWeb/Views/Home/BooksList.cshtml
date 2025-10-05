@@ -1,0 +1,21 @@
+﻿@model IEnumerable<LibraryWeb.Models.BookDto>
+
+<div style="flex: 1; overflow-y: auto; border-bottom: 1px solid #ccc;">
+    <table border="1" cellpadding="5" style="width: 100%;" id="books-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Authors</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model)
+            {
+                    <tr class="book-row" data-key="@book.Key" style="cursor:pointer;">
+                        <td>@book.Title</td>
+                        <td>@string.Join(", ", book.Authors.Select(a => a.Name))</td>
+                    </tr>
+            }
+        </tbody>
+    </table>
+</div>

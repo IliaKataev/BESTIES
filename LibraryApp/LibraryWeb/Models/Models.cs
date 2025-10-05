@@ -8,9 +8,9 @@
         public string? FirstPublishDate { get; set; }
         public string? Description { get; set; }
 
-        public List<AuthorDto> Authors { get; set; }
-        public List<BookSubjectDto> Subjects { get; set; }
-        public List<BookCoverDto> Covers { get; set; }
+        public List<AuthorDto> Authors { get; set; } = new List<AuthorDto>();
+        public List<BookSubjectDto> Subjects { get; set; } = new List<BookSubjectDto>();
+        public List<BookCoverDto> Covers { get; set; } = new List<BookCoverDto>();
     }
 
     public class AuthorDto
@@ -33,5 +33,7 @@
     {
         public long Id { get; set; }
         public int CoverFile { get; set; }
+
+        public string Url => $"/images/covers/{CoverFile}.png";
     }
 }

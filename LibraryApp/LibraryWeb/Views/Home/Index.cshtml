@@ -1,37 +1,18 @@
 ﻿@model IEnumerable<LibraryWeb.Models.BookDto>
 
-<h2>Список книг</h2>
+<h2>Библиотека</h2>
 
-<table border="1" cellpadding="5">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Subtitle</th>
-            <th>Authors</th>
-            <th>Subjects</th>
-            <th>First Publish Date</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var book in Model)
-        {
-                <tr>
-                    <td>@book.Title</td>
-                    <td>@book.Subtitle</td>
-                    <td>
-                    @foreach (var author in book.Authors)
-                    {
-                        @author.Name <br />
-                    }
-                    </td>
-                    <td>
-                    @foreach (var subject in book.Subjects)
-                    {
-                        @subject.Subject <br />
-                    }
-                    </td>
-                    <td>@book.FirstPublishDate</td>
-                </tr>
-        }
-    </tbody>
-</table>
+<div style="display: flex; gap: 20px; height: 600px;">
+    <!-- Левая колонка: поиск -->
+    @Html.Partial("SearchPanel")
+
+    <!-- Правая колонка -->
+    <div style="flex: 1; display: flex; flex-direction: column; border: 1px solid #ccc;">
+        @Html.Partial("BooksList", Model)
+        @Html.Partial("BookDetails")
+    </div>
+</div>
+
+@section Scripts {
+        <script src="~/js/home.js"></script>
+}
