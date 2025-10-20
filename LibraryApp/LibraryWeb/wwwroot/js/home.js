@@ -6,23 +6,31 @@
         const response = await fetch(`https://localhost:7055/api/books/${key}`);
         const book = await response.json();
 
-        let html = `<h3>${book.title}</h3>`;
-        html += `<p><strong>Subtitle:</strong> ${book.subtitle ?? ''}</p>`;
-        html += `<p><strong>Authors:</strong> ${book.authors.map(a => a.name).join(", ")}</p>`;
-        html += `<p><strong>First Publish Date:</strong> ${book.firstPublishDate ?? ''}</p>`;
-        html += `<p><strong>Description:</strong> ${book.description ?? ''}</p>`;
+        // Создаём общий контейнер с двумя колонками
+        let html = `
+            <div style="display: flex; gap: 20px; align-items: flex-start;">
+                <div style="width: 50%;">
+                    <h3>${book.title}</h3>
+                    <p><strong>Subtitle:</strong> ${book.subtitle ?? ''}</p>
+                    <p><strong>Authors:</strong> ${book.authors.map(a => a.name).join(", ")}</p>
+                    <p><strong>First Publish Date:</strong> ${book.firstPublishDate ?? ''}</p>
+                    <p><strong>Description:</strong> ${book.description ?? ''}</p>
+        `;
 
         if (book.subjects.length) {
             html += `<p><strong>Subjects:</strong> ${book.subjects.map(s => s.subject).join(", ")}</p>`;
         }
 
+        html += `</div>`; // закрываем блок текста
+
+        // Блок с изображениями
+        html += `<div style="width: 50%; display: flex; flex-wrap: wrap; gap: 10px;">`;
         if (book.covers.length) {
-            html += `<div>`;
             book.covers.forEach(c => {
-                html += `<img src="/images/covers/${c.coverFile}.png" alt="Cover" style="max-width:100px; margin-right:5px;" />`;
+                html += `<img src="/images/covers/${c.coverFile}.png" alt="Cover" style="max-width:100%; max-height:300px; object-fit:contain; border-radius:8px;" />`;
             });
-            html += `</div>`;
         }
+        html += `</div></div>`; // закрываем контейнер
 
         detailsDiv.innerHTML = html;
     }

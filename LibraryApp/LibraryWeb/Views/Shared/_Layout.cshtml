@@ -46,5 +46,13 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const client = localStorage.getItem("client");
+        if (!client && window.location.pathname !== "/Auth/Login") {
+            window.location.href = "/Auth/Login";
+        }
+    });
+</script>
 </body>
 </html>

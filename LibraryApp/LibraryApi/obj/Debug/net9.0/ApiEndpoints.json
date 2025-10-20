@@ -75,5 +75,21 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "LibraryApi.Controllers.ClientController",
+    "Method": "Login",
+    "RelativePath": "api/Client/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "phone",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]
