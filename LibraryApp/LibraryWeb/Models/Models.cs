@@ -1,4 +1,6 @@
-﻿namespace LibraryWeb.Models
+﻿using System.Text.Json.Serialization;
+
+namespace LibraryWeb.Models
 {
     public class BookDto
     {
@@ -35,5 +37,29 @@
         public int CoverFile { get; set; }
 
         public string Url => $"/images/covers/{CoverFile}.png";
+    }
+
+    public class CustomerDto
+    {
+        public long Customerid { get; set; } // numeric id, совпадает с БД
+        public string Name { get; set; } = string.Empty;
+        public string Address { get; set; } = string.Empty;
+        public string Zip { get; set; } = string.Empty;
+        public string City { get; set; } = string.Empty;
+        public string Phone { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+    }
+
+
+    public class IssueDto
+    {
+        public long Id { get; set; }
+        public string CustomerId { get; set; }
+        public string BookKey { get; set; }
+        public string BookTitle { get; set; }
+        public DateTime IssueDate { get; set; }
+        public DateTime ReturnUntil { get; set; }
+        public DateTime? ReturnDate { get; set; }
+        public bool Renewed { get; set; }
     }
 }

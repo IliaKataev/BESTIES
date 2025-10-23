@@ -2878,19 +2878,19 @@
   },
   "packageFolders": {
     "C:\\Users\\artgl\\.nuget\\packages\\": {},
-    "D:\\Programs\\Visual Studio Packages\\NuGetPackages": {}
+    "E:\\VS\\AllOther\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryApi\\LibraryApi.csproj",
+      "projectUniqueName": "D:\\LibraryApp\\BESTIES\\LibraryApp\\LibraryApi\\LibraryApi.csproj",
       "projectName": "LibraryApi",
-      "projectPath": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryApi\\LibraryApi.csproj",
+      "projectPath": "D:\\LibraryApp\\BESTIES\\LibraryApp\\LibraryApi\\LibraryApi.csproj",
       "packagesPath": "C:\\Users\\artgl\\.nuget\\packages\\",
-      "outputPath": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryApi\\obj\\",
+      "outputPath": "D:\\LibraryApp\\BESTIES\\LibraryApp\\LibraryApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "D:\\Programs\\Visual Studio Packages\\NuGetPackages"
+        "E:\\VS\\AllOther\\NuGetPackages"
       ],
       "configFilePaths": [
         "C:\\Users\\artgl\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2920,7 +2920,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net9.0": {
@@ -2960,7 +2960,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

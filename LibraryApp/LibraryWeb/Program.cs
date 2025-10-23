@@ -2,19 +2,34 @@ using LibraryWeb.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Подключаем MVC (контроллеры + представления)
 builder.Services.AddControllersWithViews();
 
-// HttpClient для связи с API
 builder.Services.AddHttpClient<BookApi>(client =>
 {
-    // URL API (порт должен совпадать с LibraryApi)
     client.BaseAddress = new Uri("https://localhost:7055/");
+});
+
+builder.Services.AddHttpClient<CustomerApi>(client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7055/");
+});
+builder.Services.AddHttpClient<CirculationApi>(client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7055/");
+});
+
+
+// === Добавляем сессии ===
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(60);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
 });
 
 var app = builder.Build();
 
-// Конфигурация пайплайна
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -22,12 +37,15 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
+
 app.UseRouting();
+
+// === Middleware сессии ===
+app.UseSession();
+
 app.UseAuthorization();
-app.UseStaticFiles(); // чтобы отдавать файлы из wwwroot
 
-
-// Маршруты
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}"

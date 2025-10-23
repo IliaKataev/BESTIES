@@ -1,0 +1,171 @@
+﻿@model IEnumerable<LibraryWeb.Models.CustomerDto>
+
+<h2>Manage Customers</h2>
+
+<div style="display:flex; gap:20px; height:600px;">
+    <!-- Левая колонка: поиск -->
+    <div style="width:250px; border:1px solid #ccc; padding:10px;">
+        <h4>Search</h4>
+        <div>
+            <label>ID:</label><br />
+            <input type="text" id="search-id" placeholder="C1000..." style="width:100%;" />
+        </div>
+        <div style="margin-top:10px;">
+            <label>Name:</label><br />
+            <input type="text" id="search-name" placeholder="Введите имя" style="width:100%;" />
+        </div>
+        <button id="search-button" style="margin-top:10px;">Search</button>
+
+        <div style="margin-top:10px; display:flex; gap:10px;">
+            <button id="edit-btn" class="btn btn-primary">Save Changes</button>
+            <button id="add-btn" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addCustomerModal">Add New Customer</button>
+        </div>
+    </div>
+
+    <!-- Правая колонка: список клиентов -->
+    <div style="flex:1; display:flex; flex-direction:column;">
+        <table class="table table-striped" id="customers-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Zip</th>
+                    <th>City</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in Model)
+                {
+                    <tr data-id="@c.Customerid" style="cursor:pointer;">
+                        <td>@($"C{c.Customerid:D3}")</td>
+                        <td contenteditable="true">@c.Name</td>
+                        <td contenteditable="true">@c.Address</td>
+                        <td contenteditable="true">@c.Zip</td>
+                        <td contenteditable="true">@c.City</td>
+                        <td contenteditable="true">@c.Phone</td>
+                        <td contenteditable="true">@c.Email</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        
+
+        
+    </div>
+</div>
+
+<!-- Модальное окно для добавления -->
+<div class="modal fade" id="addCustomerModal" tabindex="-1" aria-labelledby="addCustomerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="add-customer-form">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCustomerModalLabel">Add Customer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-2">
+                        <label>Name</label>
+                        <input type="text" name="Name" class="form-control" required />
+                    </div>
+                    <div class="mb-2">
+                        <label>Address</label>
+                        <input type="text" name="Address" class="form-control" />
+                    </div>
+                    <div class="mb-2">
+                        <label>Zip</label>
+                        <input type="text" name="Zip" class="form-control" />
+                    </div>
+                    <div class="mb-2">
+                        <label>City</label>
+                        <input type="text" name="City" class="form-control" />
+                    </div>
+                    <div class="mb-2">
+                        <label>Phone</label>
+                        <input type="text" name="Phone" class="form-control" />
+                    </div>
+                    <div class="mb-2">
+                        <label>Email</label>
+                        <input type="email" name="Email" class="form-control" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Add</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById("search-button").addEventListener("click", () => {
+            const idFilter = document.getElementById("search-id").value.toLowerCase();
+            const nameFilter = document.getElementById("search-name").value.toLowerCase();
+
+            document.querySelectorAll("#customers-table tbody tr").forEach(row => {
+                const id = row.cells[0].innerText.toLowerCase();
+                const name = row.cells[1].innerText.toLowerCase();
+                row.style.display = id.includes(idFilter) && name.includes(nameFilter) ? "" : "none";
+            });
+        });
+
+                document.getElementById("add-customer-form").addEventListener("submit", async (e) => {
+            e.preventDefault(); // не даём форме сделать стандартный POST
+
+            const form = e.target;
+            const customer = {
+                Name: form.Name.value,
+                Address: form.Address.value,
+                Zip: form.Zip.value,
+                City: form.City.value,
+                Phone: form.Phone.value,
+                Email: form.Email.value
+            };
+
+            const apiUrl = "https://localhost:7055/api/customers"; // твой API
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(customer)
+            });
+
+            if (!response.ok) {
+                alert("Error adding customer");
+                return;
+            }
+
+            alert("Customer added!");
+            location.reload();
+        });
+
+
+        document.getElementById("edit-btn").addEventListener("click", async () => {
+            const rows = document.querySelectorAll("#customers-table tbody tr");
+            for (let row of rows) {
+                const customer = {
+                    Customerid: parseInt(row.dataset.id),
+                    Name: row.cells[1].innerText,
+                    Address: row.cells[2].innerText,
+                    Zip: row.cells[3].innerText,
+                    City: row.cells[4].innerText,
+                    Phone: row.cells[5].innerText,
+                    Email: row.cells[6].innerText
+                };
+                        const apiUrl = "https://localhost:7055/api/customers"; // твой API порт
+
+                await fetch(`${apiUrl}/${customer.Customerid}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(customer)
+                });
+            }
+            alert("Changes saved!");
+            location.reload();
+        });
+    </script>
+}

@@ -14,6 +14,13 @@ namespace LibraryWeb.Controllers
 
         public async Task<IActionResult> Index()
         {
+            // Проверка авторизации
+            var loggedIn = HttpContext.Session.GetString("loggedIn");
+            if (loggedIn != "true")
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
             var books = await _bookApi.GetBooksAsync();
             return View(books);
         }
