@@ -351,7 +351,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "LibraryApi.Models.Issues",
+        "Type": "LibraryApi.DTOs.IssueDto",
         "MediaTypes": [
           "text/plain",
           "application/json",

@@ -11,19 +11,49 @@ namespace LibraryApi.Controllers
     {
         private readonly IIssueService _issueService; 
         private readonly ICustomerService _customerService;
+        private readonly IBookService _bookService;
 
-        public IssuesController(IIssueService issueService, ICustomerService customerService)
+        public IssuesController(IIssueService issueService, ICustomerService customerService, IBookService bookService)
         {
             _issueService = issueService;
             _customerService = customerService;
+            _bookService = bookService;
         }
 
         [HttpPost("issue")]
-        public async Task<ActionResult<Issues>> IssueBook([FromBody] IssueRequest request)
+        public async Task<ActionResult<IssueDto>> IssueBook([FromBody] IssueRequest request)
         {
-            var issue = await _issueService.IssueBookAsync(request.CustomerId, request.BookKey, request.ReturnUntil);
-            return Ok(issue);
+            // Создаем новую выдачу книги
+            var issue = await _issueService.IssueBookAsync(
+                request.CustomerId,
+                request.BookKey,
+                request.ReturnUntil
+            );
+
+            if (issue == null)
+                return BadRequest("Не удалось оформить выдачу книги.");
+
+            var book = await _bookService.GetBookDetailsAsync(request.BookKey);
+            // Получаем данные о клиенте
+            var customer = await _customerService.GetCustomerByIdAsync(request.CustomerId);
+
+            // Преобразуем в DTO (чистая модель для JSON)
+            var dto = new IssueDto
+            {
+                Issueid = issue.Issueid,
+                Customerid = issue.Customerid,
+                BookKey = issue.Bookkey,
+                BookTitle = book?.Title ?? "[Неизвестная книга]",
+                CustomerName = customer?.Name ?? "[Неизвестный читатель]",
+                DateOfIssue = issue.Dateofissue.ToDateTime(TimeOnly.MinValue),
+                ReturnUntil = issue.Returnuntil.ToDateTime(TimeOnly.MinValue),
+                ReturnDate = issue.Returndate?.ToDateTime(TimeOnly.MinValue),
+                Renewed = false
+            };
+
+            return Ok(dto);
         }
+
 
         [HttpPost("return/{issueId}")]
         public async Task<ActionResult> ReturnBook(long issueId)

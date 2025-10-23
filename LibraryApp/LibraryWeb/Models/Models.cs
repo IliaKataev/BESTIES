@@ -53,11 +53,12 @@ namespace LibraryWeb.Models
 
     public class IssueDto
     {
-        public long Id { get; set; }
-        public string CustomerId { get; set; }
-        public string BookKey { get; set; }
-        public string BookTitle { get; set; }
-        public DateTime IssueDate { get; set; }
+        public long Issueid { get; set; }
+        public long Customerid { get; set; }
+        public string BookKey { get; set; } = string.Empty;
+        public string BookTitle { get; set; } = string.Empty;
+        public string CustomerName { get; set; } = string.Empty;
+        public DateTime DateOfIssue { get; set; }
         public DateTime ReturnUntil { get; set; }
         public DateTime? ReturnDate { get; set; }
         public bool Renewed { get; set; }

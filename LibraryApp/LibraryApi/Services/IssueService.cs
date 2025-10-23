@@ -72,11 +72,14 @@ namespace LibraryApi.Services
             return issues.Select(i => new IssueDto
             {
                 Issueid = i.Issueid,
+                Customerid = i.Customerid,
+                BookKey = i.Bookkey,
                 BookTitle = i.BookkeyNavigation?.Title ?? "[No Title]",
                 CustomerName = i.Customer?.Name ?? "[No Customer]",
-                DateOfIssue = i.Dateofissue,
-                ReturnUntil = i.Returnuntil,
-                ReturnDate = i.Returndate
+                DateOfIssue = i.Dateofissue.ToDateTime(TimeOnly.MinValue),
+                ReturnUntil = i.Returnuntil.ToDateTime(TimeOnly.MinValue),
+                ReturnDate = i.Returndate?.ToDateTime(TimeOnly.MinValue),
+                Renewed = i.Returnuntil > i.Dateofissue.AddDays(21)
             }).ToList();
         }
 
@@ -87,13 +90,17 @@ namespace LibraryApi.Services
             return issues.Select(i => new IssueDto
             {
                 Issueid = i.Issueid,
+                Customerid = i.Customerid,
+                BookKey = i.Bookkey,
                 BookTitle = i.BookkeyNavigation?.Title ?? "[No Title]",
                 CustomerName = i.Customer?.Name ?? "[No Customer]",
-                DateOfIssue = i.Dateofissue,
-                ReturnUntil = i.Returnuntil,
-                ReturnDate = i.Returndate
+                DateOfIssue = i.Dateofissue.ToDateTime(TimeOnly.MinValue),
+                ReturnUntil = i.Returnuntil.ToDateTime(TimeOnly.MinValue),
+                ReturnDate = i.Returndate?.ToDateTime(TimeOnly.MinValue),
+                Renewed = i.Returnuntil > i.Dateofissue.AddDays(21)
             }).ToList();
         }
+
 
     }
 

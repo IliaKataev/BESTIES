@@ -29,12 +29,16 @@ namespace LibraryApi.Repositories
                 .Include(b => b.Authorkey)
                 .ToListAsync();
 
-        public async Task<Books?> GetByKeyAsync(string key) =>
-            await _context.Books
+        public async Task<Books?> GetByKeyAsync(string key)
+        {
+            key = key.Trim().ToUpper();
+            return await _context.Books
                 .Include(b => b.Bookcovers)
                 .Include(b => b.Booksubjects)
                 .Include(b => b.Authorkey)
-                .FirstOrDefaultAsync(b => b.Key == key);
+                .FirstOrDefaultAsync(b => b.Key.ToUpper() == key);
+        }
+
 
         public async Task<List<Books>> SearchAsync(string? title, string? author)
         {
@@ -53,12 +57,15 @@ namespace LibraryApi.Repositories
             return await query.ToListAsync();
         }
 
-        public async Task<Books?> GetByKeyWithRelationsAsync(string key) =>
-            await _context.Books
+        public async Task<Books?> GetByKeyWithRelationsAsync(string key)
+        {
+            key = key.Trim().ToUpper();
+            return await _context.Books
                 .Include(b => b.Bookcovers)
                 .Include(b => b.Booksubjects)
                 .Include(b => b.Authorkey)
-                .FirstOrDefaultAsync(b => b.Key == key);
+                .FirstOrDefaultAsync(b => b.Key.ToUpper() == key);
+        }
 
         public async Task AddAsync(Books book)
         {

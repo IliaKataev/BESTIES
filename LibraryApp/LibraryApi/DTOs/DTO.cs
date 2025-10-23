@@ -58,10 +58,12 @@
     {
         public long Issueid { get; set; }
         public long Customerid { get; set; }
-        public string BookTitle { get; set; } = null!;
-        public string CustomerName { get; set; } = null!;
-        public DateOnly DateOfIssue { get; set; }
-        public DateOnly ReturnUntil { get; set; }
-        public DateOnly? ReturnDate { get; set; }
+        public string BookKey { get; set; } = string.Empty;
+        public string BookTitle { get; set; } = string.Empty;
+        public string CustomerName { get; set; } = string.Empty;
+        public DateTime DateOfIssue { get; set; }
+        public DateTime ReturnUntil { get; set; }
+        public DateTime? ReturnDate { get; set; }
+        public bool Renewed { get; set; }
     }
 }

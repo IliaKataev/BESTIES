@@ -27,14 +27,20 @@ namespace LibraryWeb.Controllers
             if (string.IsNullOrEmpty(customerId))
                 return Json(new { success = false, message = "Customer ID is required" });
 
-            var current = await _api.GetCurrentIssuesAsync(customerId);
-            var history = await _api.GetHistoryAsync(customerId);
-
-            if (current.Count == 0 && history.Count == 0)
+            // Получаем всю информацию о клиенте
+            var customerCirculation = await _api.GetCustomerCirculationAsync(long.Parse(customerId));
+            if (customerCirculation == null || customerCirculation.Customer == null)
                 return Json(new { success = false, message = "Customer not found" });
 
-            return Json(new { success = true, currentIssues = current, history });
+            return Json(new
+            {
+                success = true,
+                customer = customerCirculation.Customer,  // <-- теперь отправляем весь объект
+                currentIssues = customerCirculation.CurrentIssues,
+                history = customerCirculation.History
+            });
         }
+
 
         [HttpPost]
         public async Task<IActionResult> IssueBook(string customerId, string bookKey)

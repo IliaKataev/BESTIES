@@ -72,7 +72,8 @@ namespace LibraryApi.Controllers
             existing.Email = customer.Email;
 
             await _customerService.UpdateCustomerAsync(existing);
-            return NoContent();
+            return new JsonResult(new { success = true, customer = existing });
+
         }
 
 
