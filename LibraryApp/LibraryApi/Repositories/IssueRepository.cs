@@ -1,4 +1,5 @@
 ﻿using LibraryApi.Data;
+using LibraryApi.DTOs;
 using LibraryApi.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -12,8 +13,9 @@ public interface IIssueRepository
     Task<Issues> AddAsync(Issues issue);
     Task UpdateAsync(Issues issue);
     Task<List<Issues>> GetByCustomerIdWithDetailsAsync(long customerId);
-
     Task<List<Issues>> GetActiveIssuesWithDetailsAsync();
+    Task<List<Issues>> GetByBookKeyWithDetailsAsync(string bookKey);
+    Task<List<Issues>> GetByBookKeyOrTitleAsync(string bookKeyOrTitle);
 }
 
 public class IssueRepository : IIssueRepository
@@ -69,4 +71,29 @@ public class IssueRepository : IIssueRepository
         _context.Issues.Update(issue);
         await _context.SaveChangesAsync();
     }
+
+    public async Task<List<Issues>> GetByBookKeyWithDetailsAsync(string bookKey)
+    {
+        return await _context.Issues
+            .Include(i => i.Customer)
+            .Include(i => i.BookkeyNavigation)
+            .Where(i => i.Bookkey == bookKey)
+            .ToListAsync();
+    }
+
+    public async Task<List<Issues>> GetByBookKeyOrTitleAsync(string bookKeyOrTitle)
+    {
+        if (string.IsNullOrWhiteSpace(bookKeyOrTitle))
+            return new List<Issues>();
+
+        var key = bookKeyOrTitle.ToLower();
+
+        return await _context.Issues
+            .Include(i => i.Customer)
+            .Include(i => i.BookkeyNavigation)
+            .Where(i => i.Bookkey.ToLower() == key ||
+                        (i.BookkeyNavigation != null && i.BookkeyNavigation.Title.ToLower().Contains(key)))
+            .ToListAsync();
+    }
+
 }

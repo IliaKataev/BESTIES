@@ -110,17 +110,6 @@ namespace LibraryApi.Controllers
             });
         }
 
-        [HttpGet("book-history/{bookKeyOrTitle}")]
-        public async Task<ActionResult<List<IssueDto>>> GetBookHistory(string bookKeyOrTitle)
-        {
-            var history = await _issueService.GetBookHistoryAsync(bookKeyOrTitle);
-
-            if (history == null || !history.Any())
-                return NotFound("History not found");
-
-            return Ok(history);
-        }
-
 
     }
 

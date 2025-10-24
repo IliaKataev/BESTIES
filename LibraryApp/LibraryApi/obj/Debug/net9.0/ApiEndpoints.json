@@ -295,6 +295,32 @@
   },
   {
     "ContainingType": "LibraryApi.Controllers.IssuesController",
+    "Method": "GetBookHistory",
+    "RelativePath": "api/Issues/book-history/{bookKeyOrTitle}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "bookKeyOrTitle",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[LibraryApi.DTOs.IssueDto, LibraryApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "LibraryApi.Controllers.IssuesController",
     "Method": "GetCustomerCirculation",
     "RelativePath": "api/Issues/customer/{customerId}",
     "HttpMethod": "GET",

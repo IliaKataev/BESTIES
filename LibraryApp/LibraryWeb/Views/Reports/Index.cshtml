@@ -1,0 +1,130 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "Reports";
+}
+
+<h2>Reports</h2>
+
+<ul class="nav nav-tabs" id="reportsTabs" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="reminders-tab" data-bs-toggle="tab" href="#reminders" role="tab">Reminders</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="book-history-tab" data-bs-toggle="tab" href="#book-history" role="tab">Book History</a>
+    </li>
+</ul>
+
+<div class="tab-content mt-3">
+    <!-- Reminders -->
+    <div class="tab-pane fade show active" id="reminders" role="tabpanel">
+        <table class="table table-bordered table-striped">
+            <thead class="table-light">
+                <tr>
+                    <th>Title</th>
+                    <th>Customer</th>
+                    <th>Date of Issue</th>
+                    <th>Return Until</th>
+                </tr>
+            </thead>
+            <tbody id="remindersTable"></tbody>
+        </table>
+    </div>
+
+    <!-- Book History -->
+    <div class="tab-pane fade" id="book-history" role="tabpanel">
+        <div class="d-flex mb-3">
+            <div style="width: 250px; margin-right: 20px;">
+                <label for="bookSearch" class="form-label">Book Key / Title</label>
+                <input type="text" id="bookSearch" class="form-control mb-2" placeholder="Enter Book Key or Title" />
+                <button id="searchBook" class="btn btn-primary w-100">Search</button>
+
+                <div id="bookInfo" class="border p-2 mt-2" style="min-height: 80px;">
+                    <strong>&lt;&lt;Title&gt;&gt;</strong><br />
+                    &lt;&lt;Subtitle&gt;&gt;
+                </div>
+            </div>
+            <div class="flex-grow-1">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Customer</th>
+                            <th>Date of Issue</th>
+                            <th>Return Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bookHistoryTable"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        async function loadReminders() {
+            try {
+                const res = await fetch('@Url.Action("LoadReminders")');
+                const data = await res.json();
+                const tbody = document.getElementById("remindersTable");
+                tbody.innerHTML = "";
+
+                data.forEach(i => {
+                    tbody.innerHTML += `<tr>
+                        <td>${i.bookTitle}</td>
+                        <td>${i.customerName}</td>
+                        <td>${new Date(i.dateOfIssue).toLocaleDateString()}</td>
+                        <td>${new Date(i.returnUntil).toLocaleDateString()}</td>
+                    </tr>`;
+                });
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        async function searchBookHistory() {
+            const keyOrTitle = document.getElementById("bookSearch").value.trim();
+            if (!keyOrTitle) return;
+
+            try {
+                const res = await fetch(`@Url.Action("LoadBookHistory")?bookKeyOrTitle=${encodeURIComponent(keyOrTitle)}`);
+                const data = await res.json();
+
+                const infoDiv = document.getElementById("bookInfo");
+                const tbody = document.getElementById("bookHistoryTable");
+                tbody.innerHTML = "";
+
+                if (data.success) {
+                    // Отображаем Title и Subtitle
+                    infoDiv.innerHTML = `<strong>${data.bookInfo.Title}</strong><br />${data.bookInfo.Subtitle || ""}`;
+
+                    // Заполняем историю
+                    if (data.history && data.history.length > 0) {
+                        data.history.forEach(i => {
+                            tbody.innerHTML += `<tr>
+                                <td>${i.customerName}</td>
+                                <td>${new Date(i.dateOfIssue).toLocaleDateString()}</td>
+                                <td>${i.returnDate ? new Date(i.returnDate).toLocaleDateString() : ""}</td>
+                            </tr>`;
+                        });
+                    } else {
+                        tbody.innerHTML = `<tr><td colspan="3" class="text-center">No history found</td></tr>`;
+                    }
+
+                } else {
+                    infoDiv.innerHTML = `<span class="text-danger">${data.message}</span>`;
+                    tbody.innerHTML = `<tr><td colspan="3" class="text-center">No history found</td></tr>`;
+                }
+
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        document.getElementById("searchBook").addEventListener("click", searchBookHistory);
+        document.getElementById("bookSearch").addEventListener("keypress", function(e){
+            if(e.key === "Enter") searchBookHistory();
+        });
+
+        document.addEventListener("DOMContentLoaded", loadReminders);
+    </script>
+}

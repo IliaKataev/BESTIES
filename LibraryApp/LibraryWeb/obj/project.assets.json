@@ -8,23 +8,23 @@
     "net9.0": []
   },
   "packageFolders": {
-    "C:\\Users\\artgl\\.nuget\\packages\\": {},
-    "E:\\VS\\AllOther\\NuGetPackages": {}
+    "C:\\Users\\zvede\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\LibraryApp\\BESTIES\\LibraryApp\\LibraryWeb\\LibraryWeb.csproj",
+      "projectUniqueName": "D:\\web\\BESTIES\\LibraryApp\\LibraryWeb\\LibraryWeb.csproj",
       "projectName": "LibraryWeb",
-      "projectPath": "D:\\LibraryApp\\BESTIES\\LibraryApp\\LibraryWeb\\LibraryWeb.csproj",
-      "packagesPath": "C:\\Users\\artgl\\.nuget\\packages\\",
-      "outputPath": "D:\\LibraryApp\\BESTIES\\LibraryApp\\LibraryWeb\\obj\\",
+      "projectPath": "D:\\web\\BESTIES\\LibraryApp\\LibraryWeb\\LibraryWeb.csproj",
+      "packagesPath": "C:\\Users\\zvede\\.nuget\\packages\\",
+      "outputPath": "D:\\web\\BESTIES\\LibraryApp\\LibraryWeb\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "E:\\VS\\AllOther\\NuGetPackages"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\artgl\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\zvede\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

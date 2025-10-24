@@ -1,6 +1,7 @@
 ﻿using LibraryApi.DTOs;
 using LibraryApi.Models;
 using LibraryApi.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace LibraryApi.Services
 {
@@ -11,6 +12,8 @@ namespace LibraryApi.Services
         Task<List<IssueDto>> GetActiveIssuesAsync();
         Task<List<IssueDto>> GetIssueHistoryAsync(long customerId);
         Task<Issues> RenewIssueAsync(long issueId);
+
+        Task<List<IssueDto>> GetBookHistoryAsync(string bookKey);
     }
 
 
@@ -101,7 +104,26 @@ namespace LibraryApi.Services
             }).ToList();
         }
 
+        public async Task<List<IssueDto>> GetBookHistoryAsync(string bookKeyOrTitle)
+        {
+            var issues = await _issueRepo.GetByBookKeyOrTitleAsync(bookKeyOrTitle);
 
+            if (issues == null || issues.Count == 0)
+                return new List<IssueDto>();
+
+            return issues.Select(i => new IssueDto
+            {
+                Issueid = i.Issueid,
+                Customerid = i.Customerid,
+                BookKey = i.Bookkey,
+                BookTitle = i.BookkeyNavigation?.Title ?? "[No Title]",
+                CustomerName = i.Customer?.Name ?? "[No Customer]",
+                DateOfIssue = i.Dateofissue.ToDateTime(TimeOnly.MinValue),
+                ReturnUntil = i.Returnuntil.ToDateTime(TimeOnly.MinValue),
+                ReturnDate = i.Returndate?.ToDateTime(TimeOnly.MinValue),
+                Renewed = i.Returnuntil > i.Dateofissue.AddDays(21)
+            }).ToList();
+        }
     }
 
 }
