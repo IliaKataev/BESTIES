@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\LibraryApp\\BESTIES\\LibraryApp\\LibraryApi\\LibraryApi.csproj": {}
+    "D:\\web\\BESTIES\\LibraryApp\\LibraryApi\\LibraryApi.csproj": {}
   },
   "projects": {
-    "D:\\LibraryApp\\BESTIES\\LibraryApp\\LibraryApi\\LibraryApi.csproj": {
+    "D:\\web\\BESTIES\\LibraryApp\\LibraryApi\\LibraryApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\LibraryApp\\BESTIES\\LibraryApp\\LibraryApi\\LibraryApi.csproj",
+        "projectUniqueName": "D:\\web\\BESTIES\\LibraryApp\\LibraryApi\\LibraryApi.csproj",
         "projectName": "LibraryApi",
-        "projectPath": "D:\\LibraryApp\\BESTIES\\LibraryApp\\LibraryApi\\LibraryApi.csproj",
-        "packagesPath": "C:\\Users\\artgl\\.nuget\\packages\\",
-        "outputPath": "D:\\LibraryApp\\BESTIES\\LibraryApp\\LibraryApi\\obj\\",
+        "projectPath": "D:\\web\\BESTIES\\LibraryApp\\LibraryApi\\LibraryApi.csproj",
+        "packagesPath": "C:\\Users\\zvede\\.nuget\\packages\\",
+        "outputPath": "D:\\web\\BESTIES\\LibraryApp\\LibraryApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "E:\\VS\\AllOther\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\artgl\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\zvede\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],

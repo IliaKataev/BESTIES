@@ -1,6 +1,7 @@
 ﻿using LibraryWeb.Models;
 using LibraryWeb.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
 
 namespace LibraryWeb.Controllers
 {
@@ -33,24 +34,70 @@ namespace LibraryWeb.Controllers
 
             // Получаем историю книги
             var history = await _api.GetBookHistoryAsync(bookKeyOrTitle);
-            // Получаем отдельную информацию о книге
+
+            if (history == null || !history.Any())
+                return Json(new { success = false, message = "No history found" });
+
+            return Json(new { success = true, history });
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> LoadBookInfo(string bookKeyOrTitle)
+        {
+            if (string.IsNullOrWhiteSpace(bookKeyOrTitle))
+                return Json(new { success = false, message = "Book Key or Title is required" });
+
+            // Получаем информацию о книге
             var bookInfo = await _api.GetBookInfoAsync(bookKeyOrTitle);
 
-            if (history == null && bookInfo == null)
-                return Json(new { success = false, message = "Book not found or no history" });
+            if (bookInfo == null)
+                return Json(new { success = false, message = "Book not found" });
 
-            var bookDto = new
-            {
-                Title = bookInfo?.Title ?? history?.FirstOrDefault()?.BookTitle ?? "[Unknown]",
-                Subtitle = bookInfo?.Subtitle ?? ""
-            };
-
-            return Json(new
-            {
-                success = true,
-                bookInfo = bookDto,
-                history = history ?? new List<IssueDto>()
-            });
+            return Json(new { success = true, bookInfo });
         }
+
+
+
+        // кнопка экспорта
+        [HttpGet]
+        public async Task<IActionResult> ExportRemindersCsv()
+        {
+            var reminders = await _api.GetRemindersAsync();
+
+            var sb = new StringBuilder();
+            sb.AppendLine("Title,Customer,Date of Issue,Return Until");
+
+            foreach (var i in reminders)
+            {
+                sb.AppendLine($"\"{i.BookTitle}\",\"{i.CustomerName}\",\"{i.DateOfIssue:yyyy-MM-dd}\",\"{i.ReturnUntil:yyyy-MM-dd}\"");
+            }
+
+            var bytes = Encoding.UTF8.GetBytes("\uFEFF" + sb.ToString()); // BOM для Excel
+            return File(bytes, "text/csv", "Reminders.csv");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ExportBookHistoryCsv(string bookKeyOrTitle)
+        {
+            if (string.IsNullOrWhiteSpace(bookKeyOrTitle))
+                return BadRequest("Book Key or Title is required");
+
+            var history = await _api.GetBookHistoryAsync(bookKeyOrTitle);
+            if (history == null || !history.Any())
+                return NotFound("No history found");
+
+            var sb = new StringBuilder();
+            sb.AppendLine("Customer,Date of Issue,Return Date");
+
+            foreach (var i in history)
+            {
+                sb.AppendLine($"\"{i.CustomerName}\",\"{i.DateOfIssue:yyyy-MM-dd}\",\"{i.ReturnDate:yyyy-MM-dd}\"");
+            }
+
+            var bytes = Encoding.UTF8.GetBytes("\uFEFF" + sb.ToString()); // BOM для Excel
+            return File(bytes, "text/csv", $"BookHistory_{bookKeyOrTitle}.csv");
+        }
+
     }
 }

@@ -47,14 +47,9 @@ namespace LibraryWeb.Services
 
             try
             {
-                var book = await _http.GetFromJsonAsync<BookDto>($"api/books/{Uri.EscapeDataString(bookKeyOrTitle)}");
-                if (book == null) return null;
-
-                return new BookInfoDto
-                {
-                    Title = book.Title,
-                    Subtitle = book.Subtitle
-                };
+                // Новый эндпоинт BooksController
+                var book = await _http.GetFromJsonAsync<BookInfoDto>($"api/books/info/{Uri.EscapeDataString(bookKeyOrTitle)}");
+                return book;
             }
             catch
             {
@@ -67,5 +62,6 @@ namespace LibraryWeb.Services
             public string Title { get; set; } = string.Empty;
             public string? Subtitle { get; set; }
         }
+
     }
 }

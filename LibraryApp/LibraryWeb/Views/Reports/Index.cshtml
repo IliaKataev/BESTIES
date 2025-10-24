@@ -3,7 +3,13 @@
     ViewBag.Title = "Reports";
 }
 
+
+
 <h2>Reports</h2>
+
+<div class="d-flex justify-content-end mb-2">
+    <button id="exportTable" class="btn btn-outline-secondary">Export</button>
+</div>
 
 <ul class="nav nav-tabs" id="reportsTabs" role="tablist">
     <li class="nav-item">
@@ -81,50 +87,138 @@
             }
         }
 
-        async function searchBookHistory() {
+        // async function searchBookHistory() {
+        //     const keyOrTitle = document.getElementById("bookSearch").value.trim();
+        //     if (!keyOrTitle) return;
+
+        //     try {
+        //         const res = await fetch(`@Url.Action("LoadBookHistory")?bookKeyOrTitle=${encodeURIComponent(keyOrTitle)}`);
+        //         const data = await res.json();
+
+        //         const infoDiv = document.getElementById("bookInfo");
+        //         const tbody = document.getElementById("bookHistoryTable");
+        //         tbody.innerHTML = "";
+
+        //         if (data.success) {
+        //             Отображаем Title и Subtitle
+        //             infoDiv.innerHTML = `<strong>${data.bookInfo.Title}</strong><br />${data.bookInfo.Subtitle || ""}`;
+
+        //             Заполняем историю
+        //             if (data.history && data.history.length > 0) {
+        //                 data.history.forEach(i => {
+        //                     tbody.innerHTML += `<tr>
+        //                         <td>${i.customerName}</td>
+        //                         <td>${new Date(i.dateOfIssue).toLocaleDateString()}</td>
+        //                         <td>${i.returnDate ? new Date(i.returnDate).toLocaleDateString() : ""}</td>
+        //                     </tr>`;
+        //                 });
+        //             } else {
+        //                 tbody.innerHTML = `<tr><td colspan="3" class="text-center">No history found</td></tr>`;
+        //             }
+
+        //         } else {
+        //             infoDiv.innerHTML = `<span class="text-danger">${data.message}</span>`;
+        //             tbody.innerHTML = `<tr><td colspan="3" class="text-center">No history found</td></tr>`;
+        //         }
+
+        //     } catch (err) {
+        //         console.error(err);
+        //     }
+        // }
+
+        document.getElementById("searchBook").addEventListener("click", async () => {
             const keyOrTitle = document.getElementById("bookSearch").value.trim();
             if (!keyOrTitle) return;
 
+            const infoDiv = document.getElementById("bookInfo");
+            const tbody = document.getElementById("bookHistoryTable");
+            tbody.innerHTML = "";
+            infoDiv.innerHTML = "Loading...";
+
             try {
-                const res = await fetch(`@Url.Action("LoadBookHistory")?bookKeyOrTitle=${encodeURIComponent(keyOrTitle)}`);
-                const data = await res.json();
+                // 1. Получаем информацию о книге
+                const infoRes = await fetch(`@Url.Action("LoadBookInfo")?bookKeyOrTitle=${encodeURIComponent(keyOrTitle)}`);
+                const infoData = await infoRes.json();
 
-                const infoDiv = document.getElementById("bookInfo");
-                const tbody = document.getElementById("bookHistoryTable");
-                tbody.innerHTML = "";
-
-                if (data.success) {
-                    // Отображаем Title и Subtitle
-                    infoDiv.innerHTML = `<strong>${data.bookInfo.Title}</strong><br />${data.bookInfo.Subtitle || ""}`;
-
-                    // Заполняем историю
-                    if (data.history && data.history.length > 0) {
-                        data.history.forEach(i => {
-                            tbody.innerHTML += `<tr>
-                                <td>${i.customerName}</td>
-                                <td>${new Date(i.dateOfIssue).toLocaleDateString()}</td>
-                                <td>${i.returnDate ? new Date(i.returnDate).toLocaleDateString() : ""}</td>
-                            </tr>`;
-                        });
-                    } else {
-                        tbody.innerHTML = `<tr><td colspan="3" class="text-center">No history found</td></tr>`;
-                    }
-
+                if (!infoData.success) {
+                    infoDiv.innerHTML = `<span class="text-danger">${infoData.message}</span>`;
                 } else {
-                    infoDiv.innerHTML = `<span class="text-danger">${data.message}</span>`;
-                    tbody.innerHTML = `<tr><td colspan="3" class="text-center">No history found</td></tr>`;
+                    infoDiv.innerHTML = `<strong>${infoData.bookInfo.Title}</strong><br />${infoData.bookInfo.Subtitle || ""}`;
+                }
+
+                // 2. Получаем историю книги
+                const historyRes = await fetch(`@Url.Action("LoadBookHistory")?bookKeyOrTitle=${encodeURIComponent(keyOrTitle)}`);
+                const historyData = await historyRes.json();
+
+                if (!historyData.success) {
+                    tbody.innerHTML = `<tr><td colspan="3" class="text-center">${historyData.message}</td></tr>`;
+                } else {
+                    for (let i of historyData.history) {
+                        const tr = document.createElement("tr");
+
+                        const tdCustomer = document.createElement("td");
+                        tdCustomer.innerText = i.customerName;
+                        tr.appendChild(tdCustomer);
+
+                        const tdIssue = document.createElement("td");
+                        tdIssue.innerText = new Date(i.dateOfIssue).toLocaleDateString();
+                        tr.appendChild(tdIssue);
+
+                        const tdReturn = document.createElement("td");
+                        tdReturn.innerText = i.returnDate ? new Date(i.returnDate).toLocaleDateString() : "";
+                        tr.appendChild(tdReturn);
+
+                        tbody.appendChild(tr);
+                    }
                 }
 
             } catch (err) {
                 console.error(err);
+                infoDiv.innerHTML = `<span class="text-danger">Error fetching data</span>`;
+                tbody.innerHTML = `<tr><td colspan="3" class="text-center">No history found</td></tr>`;
             }
-        }
+        });
 
-        document.getElementById("searchBook").addEventListener("click", searchBookHistory);
+
+       // document.getElementById("searchBook").addEventListener("click", searchBookHistory);
         document.getElementById("bookSearch").addEventListener("keypress", function(e){
             if(e.key === "Enter") searchBookHistory();
         });
 
-        document.addEventListener("DOMContentLoaded", loadReminders);
+        document.addEventListener("DOMContentLoaded", () => {
+            loadReminders();
+
+            document.getElementById("exportTable").addEventListener("click", function() {
+                const activeTab = document.querySelector('.tab-pane.active');
+                if (!activeTab) return alert("Нет активной вкладки для экспорта");
+
+                let url = '';
+                let filename = '';
+
+                if (activeTab.id === 'reminders') {
+                    url = '/Reports/ExportRemindersCsv';
+                    filename = 'Reminders.csv';
+                } else if (activeTab.id === 'book-history') {
+                    const keyOrTitle = document.getElementById("bookSearch").value.trim();
+                    if (!keyOrTitle) {
+                        alert("Введите Book Key или Title для экспорта истории");
+                        return;
+                    }
+                    url = `/Reports/ExportBookHistoryCsv?bookKeyOrTitle=${encodeURIComponent(keyOrTitle)}`;
+                    filename = `BookHistory_${keyOrTitle}.csv`;
+                } else {
+                    alert("Экспорт для этой вкладки не настроен");
+                    return;
+                }
+
+                const link = document.createElement("a");
+                link.href = url;
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+        });
+
     </script>
 }

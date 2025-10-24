@@ -119,6 +119,32 @@
   },
   {
     "ContainingType": "LibraryApi.Controllers.BooksController",
+    "Method": "GetBookInfo",
+    "RelativePath": "api/Books/info/{keyOrTitle}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "keyOrTitle",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "LibraryApi.Controllers.BooksController\u002BBookInfoDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "LibraryApi.Controllers.BooksController",
     "Method": "Search",
     "RelativePath": "api/Books/search",
     "HttpMethod": "GET",
