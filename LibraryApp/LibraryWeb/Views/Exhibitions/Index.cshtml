@@ -79,30 +79,30 @@
     let selectedBooks = new Set(); // выбранные книги
 
     // Показать коллекцию выставки
-    async function viewCollection(exhibitionId) {
-    const res = await fetch(`https://localhost:7055/api/exhibitions/${exhibitionId}`);
-    const ex = await res.json();
+        async function viewCollection(exhibitionId) {
+        const res = await fetch(`https://localhost:7055/api/exhibitions/${exhibitionId}`);
+        const ex = await res.json();
 
-    const container = document.getElementById('collectionBooks');
-    container.innerHTML = '';
+        const container = document.getElementById('collectionBooks');
+        container.innerHTML = '';
 
-    (ex.books || []).forEach(b => {
-        const col = document.createElement('div');
-        col.className = 'col-4';
-        col.innerHTML = `
-            <div class="card book-card">
-                <img src="/images/covers/${b.coverBookKey || 'default'}.png" class="card-img-top" alt="${b.bookTitle || b.bookKey}">
-                <div class="card-body text-center">
-                    <small>${b.bookTitle || b.bookKey}</small>
+        (ex.books || []).forEach(b => {
+            const col = document.createElement('div');
+            col.className = 'col-4';
+            col.innerHTML = `
+                <div class="card book-card">
+                    <img src="/images/covers/${b.coverBookKey || 'default'}.png" class="card-img-top" alt="${b.bookTitle || b.bookKey}">
+                    <div class="card-body text-center">
+                        <small>${b.bookTitle || b.bookKey}</small>
+                    </div>
                 </div>
-            </div>
-        `;
-        container.appendChild(col);
-    });
+            `;
+            container.appendChild(col);
+        });
 
-    document.getElementById('collectionModalTitle').textContent = ex.name;
-    new bootstrap.Modal(document.getElementById('viewCollectionModal')).show();
-}
+        document.getElementById('collectionModalTitle').textContent = ex.name;
+        new bootstrap.Modal(document.getElementById('viewCollectionModal')).show();
+    }
 
 
     // Загрузить выставки

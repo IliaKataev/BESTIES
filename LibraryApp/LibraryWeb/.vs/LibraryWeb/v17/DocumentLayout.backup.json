@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryWeb\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F66D4EB0-AF63-00F5-3F06-191C90D8FFFF}|LibraryWeb.csproj|d:\\studying\\besties\\besties\\libraryapp\\libraryweb\\services\\customerapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F66D4EB0-AF63-00F5-3F06-191C90D8FFFF}|LibraryWeb.csproj|solutionrelative:services\\customerapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F66D4EB0-AF63-00F5-3F06-191C90D8FFFF}|LibraryWeb.csproj|d:\\studying\\besties\\besties\\libraryapp\\libraryweb\\views\\exhibitions\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{F66D4EB0-AF63-00F5-3F06-191C90D8FFFF}|LibraryWeb.csproj|solutionrelative:views\\exhibitions\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F66D4EB0-AF63-00F5-3F06-191C90D8FFFF}|LibraryWeb.csproj|d:\\studying\\besties\\besties\\libraryapp\\libraryweb\\services\\customerapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F66D4EB0-AF63-00F5-3F06-191C90D8FFFF}|LibraryWeb.csproj|solutionrelative:services\\customerapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F66D4EB0-AF63-00F5-3F06-191C90D8FFFF}|LibraryWeb.csproj|d:\\studying\\besties\\besties\\libraryapp\\libraryweb\\services\\exhibitionapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -148,45 +148,6 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "BookApi.cs",
-              "DocumentMoniker": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryWeb\\ApiClients\\BookApi.cs",
-              "RelativeDocumentMoniker": "ApiClients\\BookApi.cs",
-              "ToolTip": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryWeb\\ApiClients\\BookApi.cs",
-              "RelativeToolTip": "ApiClients\\BookApi.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAQwBsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-24T08:17:44.05Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryWeb\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryWeb\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-24T08:17:33.583Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ExhibitionController.cs",
-              "DocumentMoniker": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryWeb\\Controllers\\ExhibitionController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ExhibitionController.cs",
-              "ToolTip": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryWeb\\Controllers\\ExhibitionController.cs",
-              "RelativeToolTip": "Controllers\\ExhibitionController.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAowAIAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-16T17:02:40.375Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
               "Title": "ExhibitionApi.cs",
               "DocumentMoniker": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryWeb\\Services\\ExhibitionApi.cs",
@@ -239,7 +200,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "CustomerApi.cs",
               "DocumentMoniker": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryWeb\\Services\\CustomerApi.cs",
               "RelativeDocumentMoniker": "Services\\CustomerApi.cs",
@@ -278,15 +239,54 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryWeb\\Views\\Exhibitions\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Exhibitions\\Index.cshtml",
-              "ToolTip": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryWeb\\Views\\Exhibitions\\Index.cshtml",
-              "RelativeToolTip": "Views\\Exhibitions\\Index.cshtml",
-              "ViewState": "AgIAADYAAAAAAAAAAAAAAMUAAAAAAAAAAAAAAA==",
+              "ToolTip": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryWeb\\Views\\Exhibitions\\Index.cshtml*",
+              "RelativeToolTip": "Views\\Exhibitions\\Index.cshtml*",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAowGkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-11-16T17:05:43.796Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ExhibitionController.cs",
+              "DocumentMoniker": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryWeb\\Controllers\\ExhibitionController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ExhibitionController.cs",
+              "ToolTip": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryWeb\\Controllers\\ExhibitionController.cs",
+              "RelativeToolTip": "Controllers\\ExhibitionController.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAowAIAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-16T17:02:40.375Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryWeb\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryWeb\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T08:17:33.583Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "BookApi.cs",
+              "DocumentMoniker": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryWeb\\ApiClients\\BookApi.cs",
+              "RelativeDocumentMoniker": "ApiClients\\BookApi.cs",
+              "ToolTip": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryWeb\\ApiClients\\BookApi.cs",
+              "RelativeToolTip": "ApiClients\\BookApi.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAQwBsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T08:17:44.05Z",
               "EditorCaption": ""
             },
             {
