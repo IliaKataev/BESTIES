@@ -92,7 +92,7 @@
         //     if (!keyOrTitle) return;
 
         //     try {
-        //         const res = await fetch(`@Url.Action("LoadBookHistory")?bookKeyOrTitle=${encodeURIComponent(keyOrTitle)}`);
+        //         const res = await fetch(Url.Action("LoadBookHistory")?bookKeyOrTitle=${encodeURIComponent(keyOrTitle)}`);
         //         const data = await res.json();
 
         //         const infoDiv = document.getElementById("bookInfo");
@@ -139,11 +139,12 @@
                 // 1. Получаем информацию о книге
                 const infoRes = await fetch(`@Url.Action("LoadBookInfo")?bookKeyOrTitle=${encodeURIComponent(keyOrTitle)}`);
                 const infoData = await infoRes.json();
+                console.log(infoData);
 
                 if (!infoData.success) {
                     infoDiv.innerHTML = `<span class="text-danger">${infoData.message}</span>`;
                 } else {
-                    infoDiv.innerHTML = `<strong>${infoData.bookInfo.Title}</strong><br />${infoData.bookInfo.Subtitle || ""}`;
+                    infoDiv.innerHTML = `<strong>${infoData.bookInfo.title}</strong><br />${infoData.bookInfo.subtitle || ""}`;
                 }
 
                 // 2. Получаем историю книги
@@ -182,7 +183,9 @@
 
        // document.getElementById("searchBook").addEventListener("click", searchBookHistory);
         document.getElementById("bookSearch").addEventListener("keypress", function(e){
-            if(e.key === "Enter") searchBookHistory();
+                if (e.key === "Enter") {
+                    document.getElementById("searchBook").click();
+                }
         });
 
         document.addEventListener("DOMContentLoaded", () => {

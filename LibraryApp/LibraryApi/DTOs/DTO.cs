@@ -66,4 +66,34 @@
         public DateTime? ReturnDate { get; set; }
         public bool Renewed { get; set; }
     }
+
+    public class ExhibitionDto
+    {
+        public int ExhibitionId { get; set; }
+        public string Name { get; set; } = null!;
+        public DateTime CreatedAt { get; set; }
+        public string? CoverBookKey { get; set; }
+
+        public List<ExhibitionBookDto> Books { get; set; } = new();
+    }
+
+    public class ExhibitionBookDto
+    {
+        public string BookKey { get; set; } = null!;
+        public int OrderNumber { get; set; }
+    }
+    public class CreateExhibitionDto
+    {
+        public string Name { get; set; } = null!;
+        public string? CoverBookKey { get; set; }
+        public List<string> BookKeys { get; set; } = new();
+    }
+
+    public class UpdateExhibitionDto
+    {
+        public string Name { get; set; } = null!;
+        public string? CoverBookKey { get; set; }
+        public List<string> BookKeys { get; set; } = new();
+    }
+
 }

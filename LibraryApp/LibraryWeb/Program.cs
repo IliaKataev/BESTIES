@@ -21,6 +21,10 @@ builder.Services.AddHttpClient<ReportsApi>(client =>
 {
     client.BaseAddress = new Uri("https://localhost:7055/");
 });
+builder.Services.AddHttpClient<ExhibitionsApi>(client =>
+{
+    client.BaseAddress = new Uri("https://localhost:7055/");
+});
 
 
 // === Добавляем сессии ===

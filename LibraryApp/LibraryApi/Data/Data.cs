@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using LibraryApi.Models;
 using Microsoft.Extensions.Options;
+using LibraryApi.DTOs;
 
 namespace LibraryApi.Data;
 
@@ -29,6 +30,8 @@ public partial class LibraryContext : DbContext
 
     public virtual DbSet<Issues> Issues { get; set; }
 
+    public virtual DbSet<Exhibitions> Exhibitions { get; set; }
+    public virtual DbSet<ExhibitionBooks> ExhibitionBooks { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Authors>(entity =>
@@ -185,6 +188,52 @@ public partial class LibraryContext : DbContext
                 .HasForeignKey(d => d.Customerid)
                 .HasConstraintName("fk_issues_customers");
         });
+
+        modelBuilder.Entity<Exhibitions>(entity =>
+        {
+            entity.HasKey(e => e.ExhibitionId).HasName("exhibitions_pkey");
+            entity.ToTable("exhibitions");
+
+            entity.Property(e => e.ExhibitionId).HasColumnName("exhibition_id");
+            entity.Property(e => e.Name)
+                .HasMaxLength(255)
+                .HasColumnName("name");
+            entity.Property(e => e.CreatedAt)
+                .HasColumnName("created_at");
+            entity.Property(e => e.CoverBookKey)
+                .HasMaxLength(128)
+                .HasColumnName("cover_book_key");
+
+            entity.HasOne(e => e.CoverBook)
+                .WithMany()
+                .HasForeignKey(e => e.CoverBookKey)
+                .HasConstraintName("fk_exhibitions_cover_book");
+        });
+
+        modelBuilder.Entity<ExhibitionBooks>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("exhibition_books_pkey");
+            entity.ToTable("exhibition_books");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.ExhibitionId).HasColumnName("exhibition_id");
+            entity.Property(e => e.BookKey)
+                .HasMaxLength(128)
+                .HasColumnName("book_key");
+            entity.Property(e => e.OrderNumber).HasColumnName("order_number");
+
+            entity.HasOne(d => d.Exhibition)
+                .WithMany(p => p.ExhibitionBooks)
+                .HasForeignKey(d => d.ExhibitionId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("fk_exhibition_books_exhibitions");
+
+            entity.HasOne(d => d.Book)
+                .WithMany()
+                .HasForeignKey(d => d.BookKey)
+                .HasConstraintName("fk_exhibition_books_books");
+        });
+
 
         OnModelCreatingPartial(modelBuilder);
     }

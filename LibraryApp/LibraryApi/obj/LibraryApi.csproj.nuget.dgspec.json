@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\web\\BESTIES\\LibraryApp\\LibraryApi\\LibraryApi.csproj": {}
+    "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryApi\\LibraryApi.csproj": {}
   },
   "projects": {
-    "D:\\web\\BESTIES\\LibraryApp\\LibraryApi\\LibraryApi.csproj": {
+    "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryApi\\LibraryApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\web\\BESTIES\\LibraryApp\\LibraryApi\\LibraryApi.csproj",
+        "projectUniqueName": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryApi\\LibraryApi.csproj",
         "projectName": "LibraryApi",
-        "projectPath": "D:\\web\\BESTIES\\LibraryApp\\LibraryApi\\LibraryApi.csproj",
-        "packagesPath": "C:\\Users\\zvede\\.nuget\\packages\\",
-        "outputPath": "D:\\web\\BESTIES\\LibraryApp\\LibraryApi\\obj\\",
+        "projectPath": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryApi\\LibraryApi.csproj",
+        "packagesPath": "C:\\Users\\artgl\\.nuget\\packages\\",
+        "outputPath": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "D:\\Programs\\Visual Studio Packages\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\zvede\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\artgl\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -44,7 +44,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net9.0": {
@@ -63,6 +63,10 @@
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[9.0.4, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.7.0, )"
             }
           },
           "imports": [
@@ -84,7 +88,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
