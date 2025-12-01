@@ -79,28 +79,69 @@
     let selectedBooks = new Set(); // выбранные книги
 
     // Показать коллекцию выставки
-        async function viewCollection(exhibitionId) {
-        const res = await fetch(`https://localhost:7055/api/exhibitions/${exhibitionId}`);
-        const ex = await res.json();
+            async function viewCollection(exhibitionId) {
+        // Получаем данные выставки
+        const exhibitionRes = await fetch(`https://localhost:7055/api/exhibitions/${exhibitionId}`);
+        const exhibition = await exhibitionRes.json();
+
+        // Получаем все книги с сервера (как в модалке создания/редактирования)
+        const booksRes = await fetch('https://localhost:7055/api/books');
+        const allBooks = await booksRes.json();
+
+        // Создаем Map для быстрого поиска книг по ключу
+        const bookMap = new Map();
+        allBooks.forEach(b => bookMap.set(b.key, b));
 
         const container = document.getElementById('collectionBooks');
         container.innerHTML = '';
 
-        (ex.books || []).forEach(b => {
-            const col = document.createElement('div');
-            col.className = 'col-4';
-            col.innerHTML = `
-                <div class="card book-card">
-                    <img src="/images/covers/${b.coverBookKey || 'default'}.png" class="card-img-top" alt="${b.bookTitle || b.bookKey}">
-                    <div class="card-body text-center">
-                        <small>${b.bookTitle || b.bookKey}</small>
+        // Получаем ключи книг из выставки
+        const bookKeys = exhibition.books?.map(b => b.bookKey) || [];
+
+        // Отображаем книги из коллекции
+        bookKeys.forEach(bookKey => {
+            const book = bookMap.get(bookKey);
+
+            // Если книга найдена, показываем с полными данными
+            if (book) {
+                // Получаем первую обложку или используем default
+                const coverFile = book.covers?.[0]?.coverFile || 'default';
+
+                const col = document.createElement('div');
+                col.className = 'col-4 mb-3';
+                col.innerHTML = `
+                    <div class="card book-card h-100">
+                        <img src="/images/covers/${coverFile}.png"
+                             class="card-img-top"
+                             alt="${book.title}"
+                             style="height: 150px; object-fit: cover;">
+                        <div class="card-body text-center">
+                            <h6 class="card-title">${book.title}</h6>
+                        </div>
                     </div>
-                </div>
-            `;
-            container.appendChild(col);
+                `;
+                container.appendChild(col);
+            } else {
+                // Если книга не найдена, показываем минимальную информацию
+                const col = document.createElement('div');
+                col.className = 'col-4 mb-3';
+                col.innerHTML = `
+                    <div class="card book-card h-100">
+                        <img src="/images/covers/default.png"
+                             class="card-img-top"
+                             alt="${bookKey}"
+                             style="height: 150px; object-fit: cover;">
+                        <div class="card-body text-center">
+                            <h6 class="card-title">${bookKey}</h6>
+                            <p class="card-text text-muted small">Информация о книге отсутствует</p>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(col);
+            }
         });
 
-        document.getElementById('collectionModalTitle').textContent = ex.name;
+        document.getElementById('collectionModalTitle').textContent = `Коллекция: ${exhibition.name}`;
         new bootstrap.Modal(document.getElementById('viewCollectionModal')).show();
     }
 
