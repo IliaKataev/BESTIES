@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryApi\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{D8702C00-4C6C-DB2F-1210-F7577BDB4928}|LibraryApi.csproj|d:\\studying\\besties\\besties\\libraryapp\\libraryapi\\controllers\\authorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D8702C00-4C6C-DB2F-1210-F7577BDB4928}|LibraryApi.csproj|solutionrelative:controllers\\authorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{D8702C00-4C6C-DB2F-1210-F7577BDB4928}|LibraryApi.csproj|d:\\studying\\besties\\besties\\libraryapp\\libraryapi\\data\\data.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D8702C00-4C6C-DB2F-1210-F7577BDB4928}|LibraryApi.csproj|solutionrelative:data\\data.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -29,10 +33,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{D8702C00-4C6C-DB2F-1210-F7577BDB4928}|LibraryApi.csproj|d:\\studying\\besties\\besties\\libraryapp\\libraryapi\\controllers\\bookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D8702C00-4C6C-DB2F-1210-F7577BDB4928}|LibraryApi.csproj|solutionrelative:controllers\\bookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D8702C00-4C6C-DB2F-1210-F7577BDB4928}|LibraryApi.csproj|d:\\studying\\besties\\besties\\libraryapp\\libraryapi\\controllers\\authorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D8702C00-4C6C-DB2F-1210-F7577BDB4928}|LibraryApi.csproj|solutionrelative:controllers\\authorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D8702C00-4C6C-DB2F-1210-F7577BDB4928}|LibraryApi.csproj|d:\\studying\\besties\\besties\\libraryapp\\libraryapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -164,7 +164,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 216,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -176,7 +176,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "DTO.cs",
               "DocumentMoniker": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryApi\\DTOs\\DTO.cs",
               "RelativeDocumentMoniker": "DTOs\\DTO.cs",
@@ -184,8 +184,7 @@
               "RelativeToolTip": "DTOs\\DTO.cs",
               "ViewState": "AgIAAFMAAAAAAAAAAAAAAFoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-24T07:16:03.183Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-24T07:16:03.183Z"
             },
             {
               "$type": "Document",
@@ -201,7 +200,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "BookController.cs",
               "DocumentMoniker": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryApi\\Controllers\\BookController.cs",
               "RelativeDocumentMoniker": "Controllers\\BookController.cs",
@@ -209,25 +208,24 @@
               "RelativeToolTip": "Controllers\\BookController.cs",
               "ViewState": "AgIAACkAAAAAAAAAAAAmwEAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-24T07:15:42.966Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-24T07:15:42.966Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 0,
               "Title": "AuthorController.cs",
               "DocumentMoniker": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryApi\\Controllers\\AuthorController.cs",
               "RelativeDocumentMoniker": "Controllers\\AuthorController.cs",
               "ToolTip": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryApi\\Controllers\\AuthorController.cs",
               "RelativeToolTip": "Controllers\\AuthorController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABoAAAAAAAAAAAAgwB4AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-24T07:15:37.588Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "ExhibitionController.cs",
               "DocumentMoniker": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryApi\\Controllers\\ExhibitionController.cs",
               "RelativeDocumentMoniker": "Controllers\\ExhibitionController.cs",
@@ -235,12 +233,11 @@
               "RelativeToolTip": "Controllers\\ExhibitionController.cs",
               "ViewState": "AgIAABYAAAAAAAAAAAAowCAAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-16T16:26:57.558Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-16T16:26:57.558Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "ExhibitionBooks.cs",
               "DocumentMoniker": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryApi\\Models\\ExhibitionBooks.cs",
               "RelativeDocumentMoniker": "Models\\ExhibitionBooks.cs",
@@ -248,12 +245,11 @@
               "RelativeToolTip": "Models\\ExhibitionBooks.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-16T16:12:41.079Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-16T16:12:41.079Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "ExhibitionRepository.cs",
               "DocumentMoniker": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryApi\\Repositories\\ExhibitionRepository.cs",
               "RelativeDocumentMoniker": "Repositories\\ExhibitionRepository.cs",
@@ -261,12 +257,11 @@
               "RelativeToolTip": "Repositories\\ExhibitionRepository.cs",
               "ViewState": "AgIAACMAAAAAAAAAAAAkwDgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-16T16:21:25.314Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-16T16:21:25.314Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "ExhibitionService.cs",
               "DocumentMoniker": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryApi\\Services\\ExhibitionService.cs",
               "RelativeDocumentMoniker": "Services\\ExhibitionService.cs",
@@ -274,12 +269,11 @@
               "RelativeToolTip": "Services\\ExhibitionService.cs",
               "ViewState": "AgIAAFMAAAAAAAAAAAAswGoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-16T16:25:33.053Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-16T16:25:33.053Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Data.cs",
               "DocumentMoniker": "D:\\studying\\BESTIES\\BESTIES\\LibraryApp\\LibraryApi\\Data\\Data.cs",
               "RelativeDocumentMoniker": "Data\\Data.cs",
@@ -300,8 +294,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAIwA8AAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-16T16:27:53.58Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-16T16:27:53.58Z"
             },
             {
               "$type": "Document",

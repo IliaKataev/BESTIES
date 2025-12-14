@@ -3,27 +3,33 @@
 <h2>Manage Customers</h2>
 
 <div style="display:flex; gap:20px; height:600px;">
-    <!-- Левая колонка: поиск -->
+
+    <!-- Левая колонка: поиск + действия -->
     <div style="width:250px; border:1px solid #ccc; padding:10px;">
         <h4>Search</h4>
+
         <div>
             <label>ID:</label><br />
-            <input type="text" id="search-id" placeholder="C1000..." style="width:100%;" />
+            <input type="text" id="search-id" placeholder="C100..." style="width:100%;" />
         </div>
+
         <div style="margin-top:10px;">
             <label>Name:</label><br />
             <input type="text" id="search-name" placeholder="Введите имя" style="width:100%;" />
         </div>
-        <button id="search-button" style="margin-top:10px;">Search</button>
 
-        <div style="margin-top:10px; display:flex; gap:10px;">
-            <button id="edit-btn" class="btn btn-primary">Save Changes</button>
-            <button id="add-btn" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addCustomerModal">Add New Customer</button>
+        <button id="search-button" class="btn btn-secondary mt-2">Search</button>
+
+        <div style="margin-top:15px; display:flex; gap:10px;">
+            <button id="edit-btn" class="btn btn-warning" disabled>Edit</button>
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addCustomerModal">
+                Add
+            </button>
         </div>
     </div>
 
-    <!-- Правая колонка: список клиентов -->
-    <div style="flex:1; display:flex; flex-direction:column;">
+    <!-- Правая колонка: таблица -->
+    <div style="flex:1; overflow:auto;">
         <table class="table table-striped" id="customers-table">
             <thead>
                 <tr>
@@ -41,60 +47,71 @@
                 {
                     <tr data-id="@c.Customerid" style="cursor:pointer;">
                         <td>@($"C{c.Customerid:D3}")</td>
-                        <td contenteditable="true">@c.Name</td>
-                        <td contenteditable="true">@c.Address</td>
-                        <td contenteditable="true">@c.Zip</td>
-                        <td contenteditable="true">@c.City</td>
-                        <td contenteditable="true">@c.Phone</td>
-                        <td contenteditable="true">@c.Email</td>
+                        <td>@c.Name</td>
+                        <td>@c.Address</td>
+                        <td>@c.Zip</td>
+                        <td>@c.City</td>
+                        <td>@c.Phone</td>
+                        <td>@c.Email</td>
                     </tr>
                 }
             </tbody>
         </table>
-        
-
-        
     </div>
 </div>
 
-<!-- Модальное окно для добавления -->
-<div class="modal fade" id="addCustomerModal" tabindex="-1" aria-labelledby="addCustomerModalLabel" aria-hidden="true">
+<!-- ================= ADD MODAL ================= -->
+<div class="modal fade" id="addCustomerModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <form id="add-customer-form">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addCustomerModalLabel">Add Customer</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title">Add Customer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
+
                 <div class="modal-body">
-                    <div class="mb-2">
-                        <label>Name</label>
-                        <input type="text" name="Name" class="form-control" required />
-                    </div>
-                    <div class="mb-2">
-                        <label>Address</label>
-                        <input type="text" name="Address" class="form-control" />
-                    </div>
-                    <div class="mb-2">
-                        <label>Zip</label>
-                        <input type="text" name="Zip" class="form-control" />
-                    </div>
-                    <div class="mb-2">
-                        <label>City</label>
-                        <input type="text" name="City" class="form-control" />
-                    </div>
-                    <div class="mb-2">
-                        <label>Phone</label>
-                        <input type="text" name="Phone" class="form-control" />
-                    </div>
-                    <div class="mb-2">
-                        <label>Email</label>
-                        <input type="email" name="Email" class="form-control" />
-                    </div>
+                    <div class="mb-2"><label>Name</label><input name="Name" class="form-control" required /></div>
+                    <div class="mb-2"><label>Address</label><input name="Address" class="form-control" /></div>
+                    <div class="mb-2"><label>Zip</label><input name="Zip" class="form-control" /></div>
+                    <div class="mb-2"><label>City</label><input name="City" class="form-control" /></div>
+                    <div class="mb-2"><label>Phone</label><input name="Phone" class="form-control" /></div>
+                    <div class="mb-2"><label>Email</label><input name="Email" type="email" class="form-control" /></div>
                 </div>
+
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Add</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-success" type="submit">Add</button>
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- ================= EDIT MODAL ================= -->
+<div class="modal fade" id="editCustomerModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="edit-customer-form">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Customer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <input type="hidden" name="Customerid" />
+
+                    <div class="mb-2"><label>Name</label><input name="Name" class="form-control" required /></div>
+                    <div class="mb-2"><label>Address</label><input name="Address" class="form-control" /></div>
+                    <div class="mb-2"><label>Zip</label><input name="Zip" class="form-control" /></div>
+                    <div class="mb-2"><label>City</label><input name="City" class="form-control" /></div>
+                    <div class="mb-2"><label>Phone</label><input name="Phone" class="form-control" /></div>
+                    <div class="mb-2"><label>Email</label><input name="Email" type="email" class="form-control" /></div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-warning" type="submit">Save</button>
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </form>
         </div>
@@ -103,69 +120,126 @@
 
 @section Scripts {
     <script>
-        document.getElementById("search-button").addEventListener("click", () => {
-            const idFilter = document.getElementById("search-id").value.toLowerCase();
+        document.addEventListener("DOMContentLoaded", () => {
+
+            const rows = document.querySelectorAll("#customers-table tbody tr");
+            const editBtn = document.getElementById("edit-btn");
+            let selectedRow = null;
+
+            /* ===== Search ===== */
+                    document.getElementById("search-button").addEventListener("click", () => {
+
+            let idFilter = document.getElementById("search-id").value.trim().toLowerCase();
             const nameFilter = document.getElementById("search-name").value.toLowerCase();
 
-            document.querySelectorAll("#customers-table tbody tr").forEach(row => {
-                const id = row.cells[0].innerText.toLowerCase();
-                const name = row.cells[1].innerText.toLowerCase();
-                row.style.display = id.includes(idFilter) && name.includes(nameFilter) ? "" : "none";
-            });
-        });
-
-                document.getElementById("add-customer-form").addEventListener("submit", async (e) => {
-            e.preventDefault(); // не даём форме сделать стандартный POST
-
-            const form = e.target;
-            const customer = {
-                Name: form.Name.value,
-                Address: form.Address.value,
-                Zip: form.Zip.value,
-                City: form.City.value,
-                Phone: form.Phone.value,
-                Email: form.Email.value
-            };
-
-            const apiUrl = "https://localhost:7055/api/customers"; // твой API
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(customer)
-            });
-
-            if (!response.ok) {
-                alert("Error adding customer");
-                return;
+            if (idFilter.length && isNaN(idFilter[0])) {
+                idFilter = idFilter.substring(1);
             }
 
-            alert("Customer added!");
-            location.reload();
+            rows.forEach(row => {
+                let rowId = row.cells[0].innerText.toLowerCase();
+                if (isNaN(rowId[0])) {
+                    rowId = rowId.substring(1);
+                }
+
+                const name = row.cells[1].innerText.toLowerCase();
+
+                row.style.display =
+                    rowId.includes(idFilter) && name.includes(nameFilter)
+                        ? ""
+                        : "none";
+            });
         });
 
 
-        document.getElementById("edit-btn").addEventListener("click", async () => {
-            const rows = document.querySelectorAll("#customers-table tbody tr");
-            for (let row of rows) {
-                const customer = {
-                    Customerid: parseInt(row.dataset.id),
-                    Name: row.cells[1].innerText,
-                    Address: row.cells[2].innerText,
-                    Zip: row.cells[3].innerText,
-                    City: row.cells[4].innerText,
-                    Phone: row.cells[5].innerText,
-                    Email: row.cells[6].innerText
-                };
-                        const apiUrl = "https://localhost:7055/api/customers"; // твой API порт
+            /* ===== Select customer ===== */
+            rows.forEach(row => {
+                row.addEventListener("click", () => {
+                    rows.forEach(r => r.classList.remove("table-active"));
+                    row.classList.add("table-active");
+                    selectedRow = row;
+                    editBtn.disabled = false;
+                });
+            });
 
-                await fetch(`${apiUrl}/${customer.Customerid}`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
+            /* ===== Open edit modal ===== */
+            editBtn.addEventListener("click", () => {
+                if (!selectedRow) return;
+
+                const form = document.getElementById("edit-customer-form");
+
+                form.Customerid.value = selectedRow.dataset.id;
+                form.Name.value = selectedRow.cells[1].innerText;
+                form.Address.value = selectedRow.cells[2].innerText;
+                form.Zip.value = selectedRow.cells[3].innerText;
+                form.City.value = selectedRow.cells[4].innerText;
+                form.Phone.value = selectedRow.cells[5].innerText;
+                form.Email.value = selectedRow.cells[6].innerText;
+
+                new bootstrap.Modal(document.getElementById("editCustomerModal")).show();
+            });
+
+            /* ===== Save edited customer ===== */
+            document.getElementById("edit-customer-form").addEventListener("submit", async (e) => {
+                e.preventDefault();
+                const f = e.target;
+
+                const customer = {
+                    Customerid: parseInt(f.Customerid.value),
+                    Name: f.Name.value,
+                    Address: f.Address.value,
+                    Zip: f.Zip.value,
+                    City: f.City.value,
+                    Phone: f.Phone.value,
+                    Email: f.Email.value
+                };
+
+                const apiUrl = "https://localhost:7055/api/customers";
+
+                const res = await fetch(`${apiUrl}/${customer.Customerid}`, {
+                    method: "PUT",
+                    headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(customer)
                 });
-            }
-            alert("Changes saved!");
-            location.reload();
+
+                if (!res.ok) {
+                    alert("Error saving customer");
+                    return;
+                }
+
+                location.reload();
+            });
+
+            /* ===== Add customer ===== */
+            document.getElementById("add-customer-form").addEventListener("submit", async (e) => {
+                e.preventDefault();
+                const f = e.target;
+
+                const customer = {
+                    Name: f.Name.value,
+                    Address: f.Address.value,
+                    Zip: f.Zip.value,
+                    City: f.City.value,
+                    Phone: f.Phone.value,
+                    Email: f.Email.value
+                };
+
+                const apiUrl = "https://localhost:7055/api/customers";
+
+                const res = await fetch(apiUrl, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(customer)
+                });
+
+                if (!res.ok) {
+                    alert("Error adding customer");
+                    return;
+                }
+
+                location.reload();
+            });
+
         });
     </script>
 }
